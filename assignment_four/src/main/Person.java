@@ -1,0 +1,31 @@
+
+public class Person {
+    private String personId;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String birthdate;
+    private HashMap<Date, Integer> demeritPoints;
+    private boolean isSuspended;
+
+    
+    public boolean addPerson() {
+
+
+    }
+
+    public boolean updatePersonalDetails {
+
+
+
+    }
+
+    public String addDemeritPoints {
+
+
+    }
+
+
+
+
+}
