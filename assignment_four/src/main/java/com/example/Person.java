@@ -1,10 +1,10 @@
 package com.example;
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
-import java.util.ArrayList;
-import java.io.File;
+import java.util.HashMap;
 import java.util.Scanner;
-
 public class Person {
     private String personId;
     private String firstName;
@@ -14,31 +14,73 @@ public class Person {
     private HashMap<Date, Integer> demeritPoints;
     private boolean isSuspended;
 
-
+    
     public boolean addPerson() {
-        
-        if this.personId.length() == 10 {
-            if ((int)this.personId[0] > 2 && (int)this.personId[0] < 9) && ((int)this.personId[1] > 2 && (int)this.personId[1] < 9) {
-                if (Character.isUpperCase(this.personId[this.personId.length()-1]) && Character.isUpperCase(this.personId[this.personId.length()-2])){
-                    String[] parts = this.address.split("|")
-                    for (string part : parts){
-                        
+        Scanner scnr = new Scanner(System.in);
+        String inputPersonId = "";
+        String inputAddress = "";
+        String inputDate ="";
+        String testFile = scnr.next();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
+            inputPersonId = reader.readLine();
+             inputAddress = reader.readLine();
+             inputDate = reader.readLine();
+            
+            
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+
+        if (inputPersonId.length() == 10 ){
+            if (((int)inputPersonId.charAt(0) > 2 && (int)inputPersonId.charAt(0) < 9) && ((int)inputPersonId.charAt(1) > 2 && (int)inputPersonId.charAt(1) < 9)) {
+                if (Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-1)) && Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-2))){
+                    String[] parts = inputAddress.split("|");
+                    boolean valid = true;
+                    if (parts.length == 5) {
+                        for (String part : parts){
+                            if (!Character.isUpperCase(part.charAt(0))) {
+                                valid = false;
+                            }
+    
+                        }
+                        if (valid) {
+                            if (parts[3].equals("Victoria")) {
+                                String[] dateParts = inputDate.split("-");
+                                if (dateParts.length == 3) {
+                                    int day = Integer.parseInt(dateParts[0]);
+                                    int month = Integer.parseInt(dateParts[1]);
+                                    if (day >= 1 && day <= 31) {
+                                        if (month >= 1 && month <= 12) {
+                                            this.personId = inputPersonId;
+                                            this.address = inputAddress;
+                                            this.birthdate = inputDate;
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                     }
+                    
                 }
             }
         }
+        return false;
+
+
 
     }
 
-    public boolean updatePersonalDetails {
+    public boolean updatePersonalDetails() {
         
 
-
+        return false;
     }
 
     public String addDemeritPoints() {
         // Read txt file + parse into an ArrayList
-
+        return "";
     }
 
 
