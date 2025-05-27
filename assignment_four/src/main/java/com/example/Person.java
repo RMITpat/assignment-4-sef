@@ -1,10 +1,10 @@
 package com.example;
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
-import java.util.ArrayList;
-import java.io.File;
+import java.util.HashMap;
 import java.util.Scanner;
-
 public class Person {
     private String personId;
     private String firstName;
@@ -16,10 +16,63 @@ public class Person {
 
     
     public boolean addPerson() {
+        Scanner scnr = new Scanner(System.in);
+        String inputPersonId = "";
+        String inputAddress = "";
+        String inputDate ="";
+        String testFile = scnr.next();
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
+            inputPersonId = reader.readLine();
+             inputAddress = reader.readLine();
+             inputDate = reader.readLine();
+            
+            
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+
+        if (inputPersonId.length() == 10 ){
+            if (((int)inputPersonId.charAt(0) > 2 && (int)inputPersonId.charAt(0) < 9) && ((int)inputPersonId.charAt(1) > 2 && (int)inputPersonId.charAt(1) < 9)) {
+                if (Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-1)) && Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-2))){
+                    String[] parts = inputAddress.split("|");
+                    boolean valid = true;
+                    if (parts.length == 5) {
+                        for (String part : parts){
+                            if (!Character.isUpperCase(part.charAt(0))) {
+                                valid = false;
+                            }
+    
+                        }
+                        if (valid) {
+                            if (parts[3].equals("Victoria")) {
+                                String[] dateParts = inputDate.split("-");
+                                if (dateParts.length == 3) {
+                                    int day = Integer.parseInt(dateParts[0]);
+                                    int month = Integer.parseInt(dateParts[1]);
+                                    if (day >= 1 && day <= 31) {
+                                        if (month >= 1 && month <= 12) {
+                                            this.personId = inputPersonId;
+                                            this.address = inputAddress;
+                                            this.birthdate = inputDate;
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    
+                }
+            }
+        }
+        return false;
+
 
 
     }
 
+<<<<<<< HEAD
     public boolean updatePersonalDetails (String personId, String firstName, String lastName, String address, String birthdate) {
         boolean madeUpdate = false;
         boolean canChangeId = false;
@@ -58,24 +111,17 @@ public class Person {
         } 
         
         return madeUpdate;
+=======
+    public boolean updatePersonalDetails() {
+>>>>>>> origin/main
         
-        
-        //TODO: This method allows updating a given person's ID, firstName, lastName, address and birthday in a TXT file.
-        //Changing personal details will not affect their demerit points or the suspension status.
-        // All relevant conditions discussed for the addPerson function also need to be considered and checked in the updatPerson function.
-        //Condition 1: If a person is under 18, their address cannot be changed.
-        //Condition 2: If a person's birthday is going to be changed, then no other personal detail (i.e, person's ID, firstName, lastName, address) can be changed.
-        //Condition 3: If the first character/digit of a person's ID is an even number, then their ID cannot be changed. 
-        //Instruction: If the Person's updated information meets the above conditions and any other conditions you may want to consider,
-        //the Person's information should be updated in the TXT file with the updated information, and the updatePersonalDetails function should return true.
-        //Otherwise, the Person's updated information should not be updated in the TXT file, and the updatePersonalDetails function should return false.
 
-
+        return false;
     }
 
     public String addDemeritPoints() {
         // Read txt file + parse into an ArrayList
-
+        return "";
     }
 
 
