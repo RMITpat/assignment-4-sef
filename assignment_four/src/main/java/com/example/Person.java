@@ -108,10 +108,45 @@ public class Person {
 
     }
 
-    public boolean updatePersonalDetails() {
-        
+    public boolean updatePersonalDetails (String personId, String firstName, String lastName, String address, String birthdate) {
+        boolean madeUpdate = false;
+        boolean canChangeId = false;
+        boolean CanChangeAdress = false;
+        boolean NoChangedAge = true;
+        int asciiValue = (int) personId.charAt(0);
+        int numericValue = asciiValue - '0';
+        int asciiValue2 = (int) personId.charAt(1);
+        int numericValue2 = asciiValue2 - '0';
+        String capsCheck = personId.substring(personId.length() - 2);
+        boolean correctNums = false;
 
-        return false;
+        if ((numericValue <= 9 && numericValue >= 2) && (numericValue2 <= 9 && numericValue2 >= 2))
+        correctNums = true;
+
+            if (!(this.address.equals(address))) {
+            return true; //dummy code
+            }
+
+
+
+
+        if (!(this.personId.equals(personId))) {
+            
+            if ((numericValue % 2 != 0) && (personId.length() == 10) && capsCheck.equals(capsCheck.toUpperCase()) && correctNums & NoChangedAge) {
+                int specCheck = 0;
+                for (int i = 4; i < 8; i++) {
+                    if (Character.isLetterOrDigit(personId.charAt(i)))
+                        specCheck++;
+                }
+                if (specCheck == 2)
+                    canChangeId = true;
+            }
+
+            
+        } 
+        
+        return madeUpdate;
+        
     }
 
     public String addDemeritPoints() {
