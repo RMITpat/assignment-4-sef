@@ -1,6 +1,9 @@
 package com.example;
 import java.util.HashMap;
 import java.util.Date;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
 
 public class Person {
     private String personId;
@@ -23,8 +26,10 @@ public class Person {
 
     }
 
-    public String addDemeritPoints {
+    public String addDemeritPoints() {
+        // Read txt file + parse into an ArrayList
 
+        inFile 
 
     }
 
