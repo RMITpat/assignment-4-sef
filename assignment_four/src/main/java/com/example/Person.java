@@ -29,8 +29,6 @@ public class Person {
     public String addDemeritPoints() {
         // Read txt file + parse into an ArrayList
 
-        inFile 
-
     }
 
 
