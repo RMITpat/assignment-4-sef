@@ -8,9 +8,19 @@ public class Person {
     private HashMap<Date, Integer> demeritPoints;
     private boolean isSuspended;
 
-    
-    public boolean addPerson() {
 
+    public boolean addPerson() {
+        
+        if this.personId.length() == 10 {
+            if ((int)this.personId[0] > 2 && (int)this.personId[0] < 9) && ((int)this.personId[1] > 2 && (int)this.personId[1] < 9) {
+                if (Character.isUpperCase(this.personId[this.personId.length()-1]) && Character.isUpperCase(this.personId[this.personId.length()-2])){
+                    String[] parts = this.address.split("|")
+                    for (string part : parts){
+                        
+                    }
+                }
+            }
+        }
 
     }
 
