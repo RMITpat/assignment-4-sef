@@ -12,7 +12,9 @@ public class App
         boolean success = person.addPerson();    
         if (success) {
             System.out.println("Added person successfully");
+            
         }
+
         else {
             System.out.println("Failed to add person");
         }

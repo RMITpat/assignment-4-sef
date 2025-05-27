@@ -19,28 +19,34 @@ public class Person {
         Scanner scnr = new Scanner(System.in);
         String inputPersonId = "";
         String inputAddress = "";
+        String inputFirstName = "";
+        String inputLastName = "";
         String inputDate ="";
         String testFile = scnr.next();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
             inputPersonId = reader.readLine();
              inputAddress = reader.readLine();
              inputDate = reader.readLine();
-            
+            inputFirstName = reader.readLine();
+            inputLastName = reader.readLine();
+
+
             
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
 
         if (inputPersonId.length() == 10 ){
-            if (((int)inputPersonId.charAt(0) > 2 && (int)inputPersonId.charAt(0) < 9) && ((int)inputPersonId.charAt(1) > 2 && (int)inputPersonId.charAt(1) < 9)) {
+            if (((Integer.parseInt("" + inputPersonId.charAt(0))) > 2 && (Integer.parseInt( "" + inputPersonId.charAt(0))) < 9) && ((Integer.parseInt("" + inputPersonId.charAt(1))) > 2 && (Integer.parseInt("" + inputPersonId.charAt(1)) < 9))) {
                 if (Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-1)) && Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-2))){
-                    String[] parts = inputAddress.split("|");
+                    String[] parts = inputAddress.split("\\|");
                     boolean valid = true;
                     if (parts.length == 5) {
-                        for (String part : parts){
-                            if (!Character.isUpperCase(part.charAt(0))) {
+                        for (int i = 1; i< parts.length; ++i){
+                            if (!Character.isUpperCase(parts[i].charAt(0))) {
                                 valid = false;
                             }
+
     
                         }
                         if (valid) {
@@ -49,22 +55,52 @@ public class Person {
                                 if (dateParts.length == 3) {
                                     int day = Integer.parseInt(dateParts[0]);
                                     int month = Integer.parseInt(dateParts[1]);
+
                                     if (day >= 1 && day <= 31) {
                                         if (month >= 1 && month <= 12) {
                                             this.personId = inputPersonId;
                                             this.address = inputAddress;
                                             this.birthdate = inputDate;
+                                            this.firstName = inputFirstName;
+                                            this.lastName = inputLastName;
+                                            System.out.println("Person details:");
+                                            System.out.println("First name: " + this.firstName);
+                                            System.out.println("Last name: " + this.lastName);
+                                            System.out.println("Person id: " + this.personId);
+                                            System.out.println("Address: " + this.address);
+                                            System.out.println("Birthdate: " + this.birthdate);
                                             return true;
+                                        }else {
+                                            System.out.println("failed month check");
                                         }
+                                    }else {
+                                        System.out.println("failed date check");
                                     }
+                                }else {
+                                    System.out.println("failed date parts count check");
                                 }
+                            }else {
+                                System.out.println("failed Victoria check");
                             }
                         }
+                        else {
+                            System.out.println("failed uppercase for address check");
+                        }
 
+                    }else {
+                        System.out.println("failed number of address parts check");
+                        System.out.println(parts.length);
                     }
                     
+                }else {
+                    System.out.println("failed uppercase check");
                 }
+            }else {
+                System.out.println("failed personid check" );
             }
+        }
+        else {
+            System.out.println("length not 10" );
         }
         return false;
 
