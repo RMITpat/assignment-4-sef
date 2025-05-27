@@ -23,7 +23,7 @@ public class Person {
         String inputLastName = "";
         String inputDate ="";
         String testFile = scnr.next();
-        try (BufferedReader reader = new BufferedReader(new FileReader("assignment_four/src/test/java/com/example/"+testFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
             inputPersonId = reader.readLine();
              inputAddress = reader.readLine();
              inputDate = reader.readLine();
