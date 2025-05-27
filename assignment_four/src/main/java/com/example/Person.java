@@ -72,7 +72,6 @@ public class Person {
 
     }
 
-<<<<<<< HEAD
     public boolean updatePersonalDetails (String personId, String firstName, String lastName, String address, String birthdate) {
         boolean madeUpdate = false;
         boolean canChangeId = false;
@@ -111,12 +110,7 @@ public class Person {
         } 
         
         return madeUpdate;
-=======
-    public boolean updatePersonalDetails() {
->>>>>>> origin/main
         
-
-        return false;
     }
 
     public String addDemeritPoints() {
