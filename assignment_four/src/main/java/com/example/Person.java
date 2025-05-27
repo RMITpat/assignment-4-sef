@@ -21,8 +21,9 @@ public class Person {
     }
 
     public boolean updatePersonalDetails (String personId, String firstName, String lastName, String address, String birthdate) {
-        boolean madeUpdate = true;
-        boolean CanChangedAdress = true;
+        boolean madeUpdate = false;
+        boolean canChangeId = false;
+        boolean CanChangeAdress = false;
         boolean NoChangedAge = true;
         int asciiValue = (int) personId.charAt(0);
         int numericValue = asciiValue - '0';
@@ -49,11 +50,13 @@ public class Person {
                     if (Character.isLetterOrDigit(personId.charAt(i)))
                         specCheck++;
                 }
-
+                if (specCheck == 2)
+                    canChangeId = true;
             }
 
             
         } 
+        
         return madeUpdate;
         
         
