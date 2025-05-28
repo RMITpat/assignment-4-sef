@@ -3,15 +3,21 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import java.io.PrintWriter;
+import java.io.File;
+
 public class Person {
     private String personId;
     private String firstName;
     private String lastName;
     private String address;
     private String birthdate;
-    private HashMap<Date, Integer> demeritPoints;
+    private HashMap<LocalDate, Integer> demeritPoints = new HashMap<>();
     private boolean isSuspended;
 
     
@@ -256,11 +262,17 @@ public class Person {
         }
 
         // Parse demerit points
-        int demeritPoints = -1;
+        int demerit = -1;
         try {
-            demeritPoints = Integer.parseInt(inputDemeritPoints);
+            demerit = Integer.parseInt(inputDemeritPoints);
         } catch (NumberFormatException e) {
             System.out.println("Demerit points must be numeric: " + e.getMessage());
+            isValid = false;
+        }
+
+        // Validate demerit points
+        if (demerit < 0 || demerit > 6) {
+            System.out.println("Demerit points must be between 0 and 6 (inclusive)");
             isValid = false;
         }
 
@@ -268,12 +280,65 @@ public class Person {
             return failedMessage;
         }
 
+        // If all validations pass, add demerit points
+        LocalDate date = LocalDate.of(year, month, day);
 
-        if (demeritPoints < 0 || demeritPoints > 6) {
-            System.out.println("Demerit points must be between 0 and 6 (inclusive)");
-            isValid = false;
+        this.demeritPoints.put(date, demerit);
+
+        // Parse birthDate of person; assumes that birthDate is in the format dd-mm-yyyy
+        String[] birthDateParts = this.birthdate.split("-");
+        int birthDay = Integer.parseInt(birthDateParts[0]);
+        int birthMonth = Integer.parseInt(birthDateParts[1]);
+        int birthYear = Integer.parseInt(birthDateParts[2]);
+
+        LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+
+        // Calculate age
+        LocalDate currentDate = LocalDate.now();
+        Period age = Period.between(birthDate, currentDate);
+        int ageYears = age.getYears();
+
+
+
+        // Total demerit points from last 2 years
+        int totalDemerit = 0;
+        for (LocalDate demeritDate : this.demeritPoints.keySet()) {
+            Period timeSinceDemerit = Period.between(demeritDate, currentDate);
+            if (timeSinceDemerit.getYears() < 2) {
+                demerit += this.demeritPoints.get(demeritDate);
+            }
         }
 
+        // Check if person is suspended
+        if (ageYears < 21 && totalDemerit > 6 ||
+            ageYears >= 21 && totalDemerit > 12) {
+            this.isSuspended = true;
+            System.out.println("Person is suspended due to exceeding demerit point limit");
+        } else {
+            this.isSuspended = false;
+            System.out.println("Person is not suspended");
+        }
+
+        // Write txt file with demerit points
+        /*
+        String outputFileName = "addDemeritPointsOut.txt";
+        File outputFile = new File(*path*);
+
+        PrintWriter writer = new PrintWriter(outputFile);
+
+        writer.println("Demerit Report - " + this.firstName + " " + this.lastName);
+        writer.println("Person ID: " + this.personId);
+        writer.println();
+        writer.println("Total Active Demerit Points: " + totalDemerit);
+
+        if (this.isSuspended) {
+            writer.println("Status: Suspended");
+        } else {
+            writer.println("Status: Not Suspended");
+        }
+
+        writer.close();
+        */
 
         return successMessage;
     }
