@@ -18,5 +18,8 @@ public class App
         else {
             System.out.println("Failed to add person");
         }
+
+        String demeritMessage = person.addDemeritPoints();
+        System.out.println(demeritMessage);
     }
 }

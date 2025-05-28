@@ -150,8 +150,132 @@ public class Person {
     }
 
     public String addDemeritPoints() {
-        // Read txt file + parse into an ArrayList
-        return "";
+
+        String failedMessage = "Failed";
+        String successMessage = "Success";
+
+        boolean isValid = true;
+
+        // Read txt file + parse into strings
+        Scanner scnr = new Scanner(System.in);
+        String inputDate = "";
+        String inputDemeritPoints = "";
+
+        String testFile;
+
+        System.out.println("Enter the name of demerit points file:");
+
+
+        testFile = scnr.next();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
+            inputDate = reader.readLine();
+            inputDemeritPoints = reader.readLine();
+            
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return failedMessage;
+        }
+
+        // Parse date
+        String[] dates = inputDate.split("-");
+        int day = -1;
+        int month = -1;
+        int year = -1;
+        
+        // Validate date format
+        if (dates.length != 3) {
+            System.out.println("Date must be in the format dd-mm-yyyy");
+            isValid = false;
+        }
+        else if (dates[0].length() != 2 ||
+                 dates[1].length() != 2 ||
+                 dates[2].length() != 4) {
+            System.out.println("Date must be in the format dd-mm-yyyy");
+            isValid = false;
+        }
+        else try {
+            
+            // determine whether or not date values are numeric
+            day = Integer.parseInt(dates[0]);
+            month = Integer.parseInt(dates[1]);
+            year = Integer.parseInt(dates[2]);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Date values must be numeric: " + e.getMessage());
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return failedMessage;
+        }
+
+        // further validate date values
+        if (day < 1 || day > 31) {
+            System.out.println("Day must be between 1 and 31 (inclusive)");
+            isValid = false;
+        }
+        if (month < 1 || month > 12) {
+            System.out.println("Month must be between 1 and 12 (inclusive)");
+            isValid = false;
+        }
+        if (year < 1950 || year > 2023) {
+            System.out.println("Year must be between 1950 and 2023 (inclusive)");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return failedMessage;
+        }
+
+        // validate date values relative to each other (e.g. Feb 31st not valid)
+        //first, validate February dates
+        if (month == 2) {
+            if (day > 29) {
+                System.out.println("Inputted date does not exist");
+                isValid = false;
+
+            // validate leap years
+            } else if (day == 29 && (year % 4 != 0) ||
+                                    (year % 100 == 0 && year % 400 != 0)) {
+                System.out.println("Inputted date does not exist");
+                isValid = false;
+            }
+        // validate months with 30 days
+        } else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) {
+            System.out.println("Inputted date does not exist");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return failedMessage;
+        }
+
+        // Parse demerit points
+        int demeritPoints = -1;
+        try {
+            demeritPoints = Integer.parseInt(inputDemeritPoints);
+        } catch (NumberFormatException e) {
+            System.out.println("Demerit points must be numeric: " + e.getMessage());
+            isValid = false;
+        }
+
+        if (!isValid) {
+            return failedMessage;
+        }
+
+
+        if (demeritPoints < 0 || demeritPoints > 6) {
+            System.out.println("Demerit points must be between 0 and 6 (inclusive)");
+            isValid = false;
+        }
+
+
+        return successMessage;
     }
 
 
