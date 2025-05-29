@@ -3,7 +3,7 @@ package com.example;
  * Hello world!
  *
  *
- *
+ * cd assignment_four
  * javac src/main/java/com/example/*.java -d out
  * java -cp out com.example.App
  *
