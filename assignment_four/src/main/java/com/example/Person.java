@@ -29,8 +29,8 @@ public class Person {
             } else {
             
               System.out.println("File already exists.");
-              myObj.delete();
-              myObj.createNewFile();
+              file.delete();
+              file.createNewFile();
               System.out.println("Replaced file.");
             }
           } catch (IOException e) {
