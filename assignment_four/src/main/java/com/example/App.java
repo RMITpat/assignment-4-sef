@@ -9,7 +9,7 @@ public class App
     {
         //System.out.print("hi");
         Person person = new Person();
-        boolean success = person.addPerson();    
+        boolean success = person.addPerson("addPersonTest.txt");    
         if (success) {
             System.out.println("Added person successfully");
             

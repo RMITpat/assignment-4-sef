@@ -53,14 +53,14 @@ public class Person {
 
         
     }
-    public boolean addPerson() {
+    public boolean addPerson(String testFile) {
         Scanner scnr = new Scanner(System.in);
         String inputPersonId = "";
         String inputAddress = "";
         String inputFirstName = "";
         String inputLastName = "";
         String inputDate ="";
-        String testFile = scnr.next();
+
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
             inputPersonId = reader.readLine();
              inputAddress = reader.readLine();
