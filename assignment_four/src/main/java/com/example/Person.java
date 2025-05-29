@@ -2,9 +2,11 @@ package com.example;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -18,14 +20,11 @@ public class Person {
     private boolean isSuspended;
 
     public File createFile(String fileName) {
+        File myObj = new File("src/output/"+fileName +".txt");
 
         try {
-            File myObj = new File("../output/"+fileName +".txt");
             if (myObj.createNewFile()) {
               System.out.println("File created: " + myObj.getName());
-
-
-
 
             } else {
               System.out.println("File already exists.");
@@ -33,6 +32,23 @@ public class Person {
           } catch (IOException e) {
             System.out.println("An error occurred.");
           }
+          return myObj;
+          
+    }
+
+    public void fileWriter( File file, ArrayList<String> outputLines) {
+         try {
+            FileWriter myWriter = new FileWriter("filename.txt");
+            for (int i = 0; i < outputLines.size(); ++i) {
+                myWriter.write(outputLines.get(i) + "\n");
+            }
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+            } catch (IOException e) {
+            System.out.println("An error occurred.");
+            }
+
+        
     }
     public boolean addPerson() {
         Scanner scnr = new Scanner(System.in);
@@ -82,12 +98,16 @@ public class Person {
                                             this.birthdate = inputDate;
                                             this.firstName = inputFirstName;
                                             this.lastName = inputLastName;
-                                            System.out.println("Person details:");
-                                            System.out.println("First name: " + this.firstName);
-                                            System.out.println("Last name: " + this.lastName);
-                                            System.out.println("Person id: " + this.personId);
-                                            System.out.println("Address: " + this.address);
-                                            System.out.println("Birthdate: " + this.birthdate);
+                                            ArrayList<String> output = new ArrayList<String>();
+                                            output.add("Person details:");
+                                            output.add("First name: " + this.firstName);
+                                            output.add("Last name: " + this.lastName);
+                                            output.add("Person id: " + this.personId);
+                                            output.add("Address: " + this.address);
+                                            output.add("Birthdate: " + this.birthdate);
+
+                                            File file = this.createFile("personDetails");
+                                            this.fileWriter(file, output);
                                             return true;
                                         }else {
                                             System.out.println("failed month check");
