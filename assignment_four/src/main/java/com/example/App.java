@@ -19,7 +19,7 @@ public class App
             System.out.println("Failed to add person");
         }
 
-        String demeritMessage = person.addDemeritPoints();
+        String demeritMessage = person.addDemeritPoints("addDemeritPointsTest.txt");
         System.out.println(demeritMessage);
     }
 }
