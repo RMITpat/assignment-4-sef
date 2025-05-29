@@ -20,11 +20,11 @@ public class Person {
     private boolean isSuspended;
 
     public File createFile(String fileName) {
-        File myObj = new File("src/output/"+fileName +".txt");
+        File file = new File("src/output/"+fileName);
 
         try {
-            if (myObj.createNewFile()) {
-              System.out.println("File created: " + myObj.getName());
+            if (file.createNewFile()) {
+              System.out.println("File created: " + file.getName());
 
             } else {
             
@@ -36,7 +36,7 @@ public class Person {
           } catch (IOException e) {
             System.out.println("An error occurred.");
           }
-          return myObj;
+          return file;
           
     }
 
@@ -63,8 +63,8 @@ public class Person {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
             inputPersonId = reader.readLine();
-             inputAddress = reader.readLine();
-             inputDate = reader.readLine();
+            inputAddress = reader.readLine();
+            inputDate = reader.readLine();
             inputFirstName = reader.readLine();
             inputLastName = reader.readLine();
 
@@ -109,7 +109,7 @@ public class Person {
                                             output.add("Address: " + this.address);
                                             output.add("Birthdate: " + this.birthdate);
 
-                                            File file = this.createFile("personDetails");
+                                            File file = this.createFile("personDetails.txt");
                                             this.fileWriter(file, output);
                                             return true;
                                         }else {
@@ -150,34 +150,98 @@ public class Person {
 
     }
 
-    public boolean updatePersonalDetails (String personId, String firstName, String lastName, String address, String birthdate) {
-        boolean madeUpdate = false;
+    public boolean updatePersonalDetails (String testFile) {
         boolean canChangeId = false;
-        boolean CanChangeAdress = false;
-        boolean NoChangedAge = true;
-        int asciiValue = (int) personId.charAt(0);
+        boolean canChangeAddress = false;
+        boolean addressValid = false;
+        boolean canChangeAge = false;
+        boolean noChangedAge = true;
+        
+        String inputPersonId = "";
+        String inputAddress = "";
+        String inputFirstName = "";
+        String inputLastName = "";
+        String inputDate ="";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+ testFile))) {
+            inputPersonId = reader.readLine();
+            inputAddress = reader.readLine();
+            inputDate = reader.readLine();
+            inputFirstName = reader.readLine();
+            inputLastName = reader.readLine();
+
+
+            
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+
+
+
+        int asciiValue = (int) inputPersonId.charAt(0);
         int numericValue = asciiValue - '0';
-        int asciiValue2 = (int) personId.charAt(1);
+        int asciiValue2 = (int) inputPersonId.charAt(1);
         int numericValue2 = asciiValue2 - '0';
-        String capsCheck = personId.substring(personId.length() - 2);
+        String capsCheck = inputPersonId.substring(inputPersonId.length() - 2);
         boolean correctNums = false;
 
+
+        
+
         if ((numericValue <= 9 && numericValue >= 2) && (numericValue2 <= 9 && numericValue2 >= 2))
-        correctNums = true;
+            correctNums = true;
 
-            if (!(this.address.equals(address))) {
-            return true; //dummy code
+        if(!(this.address.equals(inputAddress))) {
+            String[] parts = inputAddress.split("\\|");
+            addressValid = true;
+            if (parts.length == 5) {
+                for (int i = 1; i< parts.length; ++i){
+                    if (Character.isUpperCase(parts[i].charAt(0))) {
+                        
+                        if ( !(parts[3].equals("Victoria"))) {
+                            addressValid = false;
+                        }
+                    }
+                }
             }
+        }
+                    
+        String[] dateParts = inputDate.split("-");
+        if (dateParts.length == 3) {
+            int year = Integer.parseInt(dateParts[2]);
+            int day = Integer.parseInt(dateParts[0]);
+            int month = Integer.parseInt(dateParts[1]);
+
+            if (day >= 1 && day <= 31) {
+                if (month >= 1 && month <= 12) {
+                    LocalDate currentDate = LocalDate.now();
+                    LocalDate birthDate = LocalDate.of(year, day, month);
+                    Period age = Period.between(birthDate, currentDate);
+                    int ageYears = age.getYears();
+                    canChangeAge = true;
+                    if (ageYears < 18) {
+                        canChangeAddress = false;
+                    }
+                    noChangedAge = false;
+                    
+                }
+            }
+        }
+                        
+                    
+
+
+                
 
 
 
 
-        if (!(this.personId.equals(personId))) {
+        if (!(this.personId.equals(inputPersonId))) {
             
-            if ((numericValue % 2 != 0) && (personId.length() == 10) && capsCheck.equals(capsCheck.toUpperCase()) && correctNums & NoChangedAge) {
+            if ((numericValue % 2 != 0) && (inputPersonId.length() == 10) && capsCheck.equals(capsCheck.toUpperCase()) && correctNums && noChangedAge) {
                 int specCheck = 0;
                 for (int i = 4; i < 8; i++) {
-                    if (Character.isLetterOrDigit(personId.charAt(i)))
+                    if (Character.isLetterOrDigit(inputPersonId.charAt(i)))
                         specCheck++;
                 }
                 if (specCheck == 2)
@@ -186,6 +250,25 @@ public class Person {
 
             
         } 
+        
+        boolean flag = true;
+        if (canChangeAge && canChangeId && addressValid) {
+            if (canChangeAddress && noChangedAge)
+                this.address = inputAddress;
+            if (canChangeAge)
+                this.birthdate = inputDate;
+            if (canChangeId)
+                this.personId = inputPersonId;
+            if (noChangedAge) {
+                this.firstName = inputFirstName;
+                this.lastName = inputLastName;
+            }
+
+        } 
+        else {
+            flag = false;
+        }
+        boolean madeUpdate = flag;
         
         return madeUpdate;
         
@@ -260,8 +343,8 @@ public class Person {
             System.out.println("Month must be between 1 and 12 (inclusive)");
             isValid = false;
         }
-        if (year < 1950 || year > 2023) {
-            System.out.println("Year must be between 1950 and 2023 (inclusive)");
+        if (year < 1950 || year > 2024) {
+            System.out.println("Year must be between 1950 and 2024 (inclusive)");
             isValid = false;
         }
 
@@ -350,26 +433,19 @@ public class Person {
             System.out.println("Person is not suspended");
         }
 
-        // Write txt file with demerit points
-        /*
-        String outputFileName = "addDemeritPointsOut.txt";
-        File outputFile = new File(*path*);
-
-        PrintWriter writer = new PrintWriter(outputFile);
-
-        writer.println("Demerit Report - " + this.firstName + " " + this.lastName);
-        writer.println("Person ID: " + this.personId);
-        writer.println();
-        writer.println("Total Active Demerit Points: " + totalDemerit);
-
+        ArrayList<String> output = new ArrayList<>();
+        output.add("Demerit Report - " + this.firstName + " " + this.lastName);
+        output.add("Person ID: " + this.personId);
+        output.add("");
+        output.add("Total Active Demerit Points: " + totalDemerit);
         if (this.isSuspended) {
-            writer.println("Status: Suspended");
+            output.add("Status: Suspended");
         } else {
-            writer.println("Status: Not Suspended");
+            output.add("Status: Not Suspended");
         }
 
-        writer.close();
-        */
+        File outFile = this.createFile("demeritDetails.txt");
+        this.fileWriter(outFile, output);
 
         return successMessage;
     }
