@@ -31,6 +31,7 @@ public class Person {
               System.out.println("File already exists.");
               myObj.delete();
               myObj.createNewFile();
+              System.out.println("Replaced file.");
             }
           } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -54,7 +55,6 @@ public class Person {
         
     }
     public boolean addPerson(String testFile) {
-        Scanner scnr = new Scanner(System.in);
         String inputPersonId = "";
         String inputAddress = "";
         String inputFirstName = "";
@@ -113,32 +113,32 @@ public class Person {
                                             this.fileWriter(file, output);
                                             return true;
                                         }else {
-                                            System.out.println("failed month check");
+                                            System.out.println("Failed month check");
                                         }
                                     }else {
-                                        System.out.println("failed date check");
+                                        System.out.println("Failed date check");
                                     }
                                 }else {
-                                    System.out.println("failed date parts count check");
+                                    System.out.println("Failed date parts count check");
                                 }
                             }else {
-                                System.out.println("failed Victoria check");
+                                System.out.println("Failed Victoria check");
                             }
                         }
                         else {
-                            System.out.println("failed uppercase for address check");
+                            System.out.println("Failed uppercase for address check");
                         }
 
                     }else {
-                        System.out.println("failed number of address parts check");
+                        System.out.println("Failed number of address parts check");
                         System.out.println(parts.length);
                     }
                     
                 }else {
-                    System.out.println("failed uppercase check");
+                    System.out.println("Failed uppercase check");
                 }
             }else {
-                System.out.println("failed personid check" );
+                System.out.println("Failed personid check" );
             }
         }
         else {
