@@ -1,15 +1,12 @@
 package com.example;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashMap;
 import java.util.Scanner;
-
-import java.io.PrintWriter;
-import java.io.File;
 
 public class Person {
     private String personId;
@@ -20,7 +17,23 @@ public class Person {
     private HashMap<LocalDate, Integer> demeritPoints = new HashMap<>();
     private boolean isSuspended;
 
-    
+    public File createFile(String fileName) {
+
+        try {
+            File myObj = new File("../output/"+fileName +".txt");
+            if (myObj.createNewFile()) {
+              System.out.println("File created: " + myObj.getName());
+
+
+
+
+            } else {
+              System.out.println("File already exists.");
+            }
+          } catch (IOException e) {
+            System.out.println("An error occurred.");
+          }
+    }
     public boolean addPerson() {
         Scanner scnr = new Scanner(System.in);
         String inputPersonId = "";
