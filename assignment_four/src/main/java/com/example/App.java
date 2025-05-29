@@ -25,6 +25,8 @@ public class App
             System.out.println("Failed to add person");
         }
 
+        boolean updatePerson = person.updatePersonalDetails("addPersonTest.txt");
+        System.out.println(updatePerson);
         String demeritMessage = person.addDemeritPoints("addDemeritPointsTest.txt");
         System.out.println(demeritMessage);
     }
