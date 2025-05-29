@@ -27,7 +27,10 @@ public class Person {
               System.out.println("File created: " + myObj.getName());
 
             } else {
+            
               System.out.println("File already exists.");
+              myObj.delete();
+              myObj.createNewFile();
             }
           } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -38,7 +41,7 @@ public class Person {
 
     public void fileWriter( File file, ArrayList<String> outputLines) {
          try {
-            FileWriter myWriter = new FileWriter("filename.txt");
+            FileWriter myWriter = new FileWriter(file);
             for (int i = 0; i < outputLines.size(); ++i) {
                 myWriter.write(outputLines.get(i) + "\n");
             }
@@ -98,7 +101,7 @@ public class Person {
                                             this.birthdate = inputDate;
                                             this.firstName = inputFirstName;
                                             this.lastName = inputLastName;
-                                            ArrayList<String> output = new ArrayList<String>();
+                                            ArrayList<String> output = new ArrayList<>();
                                             output.add("Person details:");
                                             output.add("First name: " + this.firstName);
                                             output.add("Last name: " + this.lastName);
