@@ -2,6 +2,12 @@ package com.example;
 /**
  * Hello world!
  *
+ *
+ *
+ * javac src/main/java/com/example/*.java -d out
+ * java -cp out com.example.App
+ *
+ * 
  */
 public class App 
 {
