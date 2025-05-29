@@ -20,22 +20,22 @@ public class Person {
     private boolean isSuspended;
 
     public File createFile(String fileName) {
-        File myObj = new File("src/output/"+fileName +".txt");
+        File file = new File("src/output/"+fileName);
 
         try {
-            if (myObj.createNewFile()) {
-              System.out.println("File created: " + myObj.getName());
+            if (file.createNewFile()) {
+              System.out.println("File created: " + file.getName());
 
             } else {
             
               System.out.println("File already exists.");
-              myObj.delete();
-              myObj.createNewFile();
+              file.delete();
+              file.createNewFile();
             }
           } catch (IOException e) {
             System.out.println("An error occurred.");
           }
-          return myObj;
+          return file;
           
     }
 
@@ -54,7 +54,7 @@ public class Person {
         
     }
     public boolean addPerson(String testFile) {
-        Scanner scnr = new Scanner(System.in);
+
         String inputPersonId = "";
         String inputAddress = "";
         String inputFirstName = "";
@@ -63,8 +63,8 @@ public class Person {
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
             inputPersonId = reader.readLine();
-             inputAddress = reader.readLine();
-             inputDate = reader.readLine();
+            inputAddress = reader.readLine();
+            inputDate = reader.readLine();
             inputFirstName = reader.readLine();
             inputLastName = reader.readLine();
 
@@ -109,7 +109,7 @@ public class Person {
                                             output.add("Address: " + this.address);
                                             output.add("Birthdate: " + this.birthdate);
 
-                                            File file = this.createFile("personDetails");
+                                            File file = this.createFile("personDetails.txt");
                                             this.fileWriter(file, output);
                                             return true;
                                         }else {
@@ -260,8 +260,8 @@ public class Person {
             System.out.println("Month must be between 1 and 12 (inclusive)");
             isValid = false;
         }
-        if (year < 1950 || year > 2023) {
-            System.out.println("Year must be between 1950 and 2023 (inclusive)");
+        if (year < 1950 || year > 2024) {
+            System.out.println("Year must be between 1950 and 2024 (inclusive)");
             isValid = false;
         }
 
@@ -350,26 +350,19 @@ public class Person {
             System.out.println("Person is not suspended");
         }
 
-        // Write txt file with demerit points
-        /*
-        String outputFileName = "addDemeritPointsOut.txt";
-        File outputFile = new File(*path*);
-
-        PrintWriter writer = new PrintWriter(outputFile);
-
-        writer.println("Demerit Report - " + this.firstName + " " + this.lastName);
-        writer.println("Person ID: " + this.personId);
-        writer.println();
-        writer.println("Total Active Demerit Points: " + totalDemerit);
-
+        ArrayList<String> output = new ArrayList<>();
+        output.add("Demerit Report - " + this.firstName + " " + this.lastName);
+        output.add("Person ID: " + this.personId);
+        output.add("");
+        output.add("Total Active Demerit Points: " + totalDemerit);
         if (this.isSuspended) {
-            writer.println("Status: Suspended");
+            output.add("Status: Suspended");
         } else {
-            writer.println("Status: Not Suspended");
+            output.add("Status: Not Suspended");
         }
 
-        writer.close();
-        */
+        File outFile = this.createFile("demeritDetails.txt");
+        this.fileWriter(outFile, output);
 
         return successMessage;
     }
