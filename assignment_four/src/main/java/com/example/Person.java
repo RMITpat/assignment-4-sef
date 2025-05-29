@@ -29,8 +29,8 @@ public class Person {
             } else {
             
               System.out.println("File already exists.");
-              myObj.delete();
-              myObj.createNewFile();
+              file.delete();
+              file.createNewFile();
               System.out.println("Replaced file.");
             }
           } catch (IOException e) {
@@ -73,13 +73,20 @@ public class Person {
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
-
+        //the length of the id must be 10
         if (inputPersonId.length() == 10 ){
+            //checks if there are 2 numbers at the starts
+            if (Character.isDigit(inputPersonId.charAt(0))  && Character.isDigit(inputPersonId.charAt(1)) ) {
+                //checks if the 2 numbers are above 2 and below 9
             if (((Integer.parseInt("" + inputPersonId.charAt(0))) > 2 && (Integer.parseInt( "" + inputPersonId.charAt(0))) < 9) && ((Integer.parseInt("" + inputPersonId.charAt(1))) > 2 && (Integer.parseInt("" + inputPersonId.charAt(1)) < 9))) {
+                //checks if the last 2 characters are letters and they are uppercase
                 if (Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-1)) && Character.isUpperCase(inputPersonId.charAt(inputPersonId.length()-2))){
+                    // split up the address into parts
                     String[] parts = inputAddress.split("\\|");
                     boolean valid = true;
+                    //check if there were 5 parts, house number, street,city, state, country
                     if (parts.length == 5) {
+                        //check if the street, city, state and country start with a capital letter
                         for (int i = 1; i< parts.length; ++i){
                             if (!Character.isUpperCase(parts[i].charAt(0))) {
                                 valid = false;
@@ -88,19 +95,25 @@ public class Person {
     
                         }
                         if (valid) {
+                            //checks if the state is Victoria
                             if (parts[3].equals("Victoria")) {
+                                //split up the birthdate into day month year
                                 String[] dateParts = inputDate.split("-");
+                                //check if there was a day month and year
                                 if (dateParts.length == 3) {
                                     int day = Integer.parseInt(dateParts[0]);
                                     int month = Integer.parseInt(dateParts[1]);
-
+                                    //check if the day is between 1 and 31 inclusive
                                     if (day >= 1 && day <= 31) {
+                                        //check if the month is between 1 and 12 inclusive
                                         if (month >= 1 && month <= 12) {
+                                            //all tests passed, create an output file
                                             this.personId = inputPersonId;
                                             this.address = inputAddress;
                                             this.birthdate = inputDate;
                                             this.firstName = inputFirstName;
                                             this.lastName = inputLastName;
+                                            
                                             ArrayList<String> output = new ArrayList<>();
                                             output.add("Person details:");
                                             output.add("First name: " + this.firstName);
@@ -140,6 +153,9 @@ public class Person {
             }else {
                 System.out.println("Failed personid check" );
             }
+        } else {
+            System.out.println("Failed id number check");
+        }
         }
         else {
             System.out.println("length not 10" );
