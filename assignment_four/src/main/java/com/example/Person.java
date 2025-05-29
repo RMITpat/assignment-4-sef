@@ -155,7 +155,7 @@ public class Person {
         
     }
 
-    public String addDemeritPoints() {
+    public String addDemeritPoints(String fileName) {
 
         String failedMessage = "Failed";
         String successMessage = "Success";
@@ -167,14 +167,9 @@ public class Person {
         String inputDate = "";
         String inputDemeritPoints = "";
 
-        String testFile;
-
         System.out.println("Enter the name of demerit points file:");
-
-
-        testFile = scnr.next();
         
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+fileName))) {
             inputDate = reader.readLine();
             inputDemeritPoints = reader.readLine();
             
