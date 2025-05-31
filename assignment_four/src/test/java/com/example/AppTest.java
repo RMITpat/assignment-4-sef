@@ -18,7 +18,7 @@ import org.junit.Test;
 public class AppTest 
 {
     // THE FOLLOWING FUNCTION IS WHITESPACE SENSITIVE
-    public boolean compareFiles(String file1, String file2) {
+    public boolean compareFiles(String fileExpected, String fileActual) {
 
         // Initialize readers for the two files
 
@@ -29,7 +29,7 @@ public class AppTest
 
 
         try {
-            BufferedReader reader1 = new BufferedReader(new FileReader("src/output/"+file1));
+            BufferedReader reader1 = new BufferedReader(new FileReader("out/expected/"+fileExpected));
             while ((line = reader1.readLine()) != null) {
                 lines1.add(line);
             }
@@ -41,7 +41,7 @@ public class AppTest
         }
 
         try {
-            BufferedReader reader2 = new BufferedReader(new FileReader("src/output/"+file2));
+            BufferedReader reader2 = new BufferedReader(new FileReader("out/actual/"+fileActual));
             while ((line = reader2.readLine()) != null) {
                 lines2.add(line);
             }

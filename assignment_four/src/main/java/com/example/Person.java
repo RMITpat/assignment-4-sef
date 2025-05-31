@@ -20,7 +20,7 @@ public class Person {
     private boolean isSuspended;
 
     public File createFile(String fileName) {
-        File file = new File("src/output/"+fileName);
+        File file = new File("out/actual/"+fileName);
 
         try {
             if (file.createNewFile()) {
