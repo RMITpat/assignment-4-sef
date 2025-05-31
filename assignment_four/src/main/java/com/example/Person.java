@@ -91,8 +91,6 @@ public class Person {
                             if (!Character.isUpperCase(parts[i].charAt(0))) {
                                 valid = false;
                             }
-
-    
                         }
                         if (valid) {
                             //checks if the state is Victoria
