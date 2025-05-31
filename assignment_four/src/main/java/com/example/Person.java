@@ -282,11 +282,8 @@ public class Person {
         boolean isValid = true;
 
         // Read txt file + parse into strings
-        Scanner scnr = new Scanner(System.in);
         String inputDate = "";
         String inputDemeritPoints = "";
-
-        System.out.println("Enter the name of demerit points file:");
         
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+fileName))) {
             inputDate = reader.readLine();
