@@ -20,7 +20,7 @@ public class Person {
     private boolean isSuspended;
 
     public File createFile(String fileName) {
-        File file = new File("src/output/"+fileName);
+        File file = new File("out/actual/"+fileName);
 
         try {
             if (file.createNewFile()) {
@@ -178,6 +178,7 @@ public class Person {
         String inputDate ="";
 
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+ testFile))) {
+
             inputPersonId = reader.readLine();
             inputAddress = reader.readLine();
             inputDate = reader.readLine();
@@ -229,7 +230,7 @@ public class Person {
             if (day >= 1 && day <= 31) {
                 if (month >= 1 && month <= 12) {
                     LocalDate currentDate = LocalDate.now();
-                    LocalDate birthDate = LocalDate.of(year, day, month);
+                    LocalDate birthDate = LocalDate.of(year, month, day);
                     Period age = Period.between(birthDate, currentDate);
                     int ageYears = age.getYears();
                     canChangeAge = true;
@@ -277,7 +278,16 @@ public class Person {
                 this.firstName = inputFirstName;
                 this.lastName = inputLastName;
             }
+            ArrayList<String> output = new ArrayList<>();
+            output.add("Person details:");
+            output.add("First name: " + this.firstName);
+            output.add("Last name: " + this.lastName);
+            output.add("Person id: " + this.personId);
+            output.add("Address: " + this.address);
+            output.add("Birthdate: " + this.birthdate);
 
+            File file = this.createFile("personDetails.txt");
+            this.fileWriter(file, output);
         } 
         else {
             flag = false;
@@ -296,11 +306,8 @@ public class Person {
         boolean isValid = true;
 
         // Read txt file + parse into strings
-        Scanner scnr = new Scanner(System.in);
         String inputDate = "";
         String inputDemeritPoints = "";
-
-        System.out.println("Enter the name of demerit points file:");
         
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+fileName))) {
             inputDate = reader.readLine();
