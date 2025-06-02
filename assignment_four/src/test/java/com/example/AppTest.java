@@ -1,13 +1,12 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
-
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 
@@ -63,11 +62,10 @@ public class AppTest
     // Compare contents line-by-line
     for (int i = 0; i < lines1.size(); i++) {
         if (!lines1.get(i).equals(lines2.get(i))) {
+            System.out.println(lines1.get(1) + " is different to " + lines2.get(i));
             return false;
         }
     }
-        
-
         return true;
     }
 
@@ -78,6 +76,7 @@ public class AppTest
     public void shouldAnswerWithTrue()
     {
         assertTrue( true );
+        System.out.println("hi");
     }
     @Test
     public void testFiles() {
@@ -87,5 +86,47 @@ public class AppTest
         assertTrue(compareFiles(expectedFile, actualFile));
     }
 
+    @Test
+    public void addPersonValid() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));   
+        String expectedFile = "addPersonValid_expected.txt";
+        String actualFile = "addPersonValid_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
     
+    @Test
+    public void addPersonInvalidIDLength() {
+        Person person = new Person();
+        assertFalse(person.addPerson("addPersonInvalidIDLength"));   
+        String expectedFile = "addPersonInvalidIDLength_expected.txt";
+        String actualFile = "addPersonInvalidIDLength_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test
+    public void addPersonInvalidID() {
+        Person person = new Person();
+        assertFalse(person.addPerson("addPersonInvalidID"));   
+        String expectedFile = "addPersonInvalidID_expected.txt";
+        String actualFile = "addPersonInvalidID_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+    @Test
+    public void addPersonInvalidState() {
+        Person person = new Person();
+        assertFalse(person.addPerson("addPersonInvalidState"));   
+        String expectedFile = "addPersonInvalidState_expected.txt";
+        String actualFile = "addPersonInvalidState_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test
+    public void addPersonInvalidAddress() {
+        Person person = new Person();
+        assertFalse(person.addPerson("addPersonInvalidAddress"));   
+        String expectedFile = "addPersonInvalidAddress_expected.txt";
+        String actualFile = "addPersonInvalidAddress_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
 }

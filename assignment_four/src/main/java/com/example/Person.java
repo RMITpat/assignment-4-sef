@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Person {
     private String personId;
@@ -28,10 +27,10 @@ public class Person {
 
             } else {
             
-              System.out.println("File already exists.");
+              System.out.println("File " + fileName + " already exists.");
               file.delete();
               file.createNewFile();
-              System.out.println("Replaced file.");
+              System.out.println("Replaced file " + fileName + ".");
             }
           } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -61,7 +60,7 @@ public class Person {
         String inputLastName = "";
         String inputDate ="";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+testFile+".txt"))) {
             inputPersonId = reader.readLine();
             inputAddress = reader.readLine();
             inputDate = reader.readLine();
@@ -120,11 +119,12 @@ public class Person {
                                             output.add("Address: " + this.address);
                                             output.add("Birthdate: " + this.birthdate);
 
-                                            File file = this.createFile("personDetails.txt");
-                                            this.fileWriter(file, output);
+                                            File createdFile = this.createFile(testFile + "_actual.txt");
+                                            this.fileWriter(createdFile, output);
                                             return true;
                                         }else {
                                             System.out.println("Failed month check");
+                                            
                                         }
                                     }else {
                                         System.out.println("Failed date check");
@@ -158,6 +158,8 @@ public class Person {
         else {
             System.out.println("length not 10" );
         }
+        this.createFile(testFile + "_actual.txt");
+
         return false;
 
 

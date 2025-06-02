@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.AppTest" time="0.105" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.AppTest" time="0.156" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="user.country" value="AU"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/patrickly/assignment-4-sef/assignment_four/target/surefire/surefirebooter2988724109548455054.jar /Users/patrickly/assignment-4-sef/assignment_four/target/surefire 2025-05-29T15-59-21_205-jvmRun1 surefire17808841823653275165tmp surefire_01554434337651893252tmp"/>
+    <property name="sun.java.command" value="/Users/patrickly/assignment-4-sef/assignment_four/target/surefire/surefirebooter4458678317895235585.jar /Users/patrickly/assignment-4-sef/assignment_four/target/surefire 2025-06-02T15-56-43_002-jvmRun1 surefire13325917855952312923tmp surefire_014124718416756666694tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="com.example.AppTest"/>
@@ -29,7 +29,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/Users/patrickly/assignment-4-sef/assignment_four/target/surefire/surefirebooter2988724109548455054.jar"/>
+    <property name="surefire.real.class.path" value="/Users/patrickly/assignment-4-sef/assignment_four/target/surefire/surefirebooter4458678317895235585.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="17.0.11+9"/>
@@ -57,5 +57,11 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.example.AppTest" time="0.002"/>
+  <testcase name="invalidID" classname="com.example.AppTest" time="0.01"/>
+  <testcase name="invalidAddress" classname="com.example.AppTest" time="0.005"/>
+  <testcase name="validAddPerson" classname="com.example.AppTest" time="0.014"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.example.AppTest" time="0.001"/>
+  <testcase name="testFiles" classname="com.example.AppTest" time="0.005"/>
+  <testcase name="invalidIDLength" classname="com.example.AppTest" time="0.004"/>
+  <testcase name="invalidState" classname="com.example.AppTest" time="0.003"/>
 </testsuite>
