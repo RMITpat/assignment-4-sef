@@ -320,7 +320,10 @@ public class Person {
             isValid = false;
         }
 
+        // each time this chunk of code appears, it is a "checkpoint" for validity.
+        // if input is not valid, the file is created with no content, and "Failed" is returned.
         if (!isValid) {
+            this.createFile(fileName + "_actual.txt");
             return failedMessage;
         }
 
@@ -354,6 +357,7 @@ public class Person {
         }
 
         if (!isValid) {
+            this.createFile(fileName + "_actual.txt");
             return failedMessage;
         }
 
@@ -373,6 +377,7 @@ public class Person {
         }
 
         if (!isValid) {
+            this.createFile(fileName + "_actual.txt");
             return failedMessage;
         }
 
@@ -396,6 +401,7 @@ public class Person {
         }
 
         if (!isValid) {
+            this.createFile(fileName + "_actual.txt");
             return failedMessage;
         }
 
@@ -415,6 +421,7 @@ public class Person {
         }
 
         if (!isValid) {
+            this.createFile(fileName + "_actual.txt");
             return failedMessage;
         }
 
