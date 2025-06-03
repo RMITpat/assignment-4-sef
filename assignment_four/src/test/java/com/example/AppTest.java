@@ -127,10 +127,25 @@ public class AppTest
     public void addDemeritPoints() {
         Person person = new Person();
         assertTrue(person.addPerson("addPersonValid"));
-        String demeritMessage = person.addDemeritPoints("addDemeritPoints");
+
+        String filePrefix = "addDemeritPoints";
+        String demeritMessage = person.addDemeritPoints(filePrefix);
         assertTrue(demeritMessage.contains("Success"));
-        String expectedFile = "addDemeritPoints_expected.txt";
-        String actualFile = "addDemeritPoints_actual.txt";
+        String expectedFile = filePrefix + "_expected.txt";
+        String actualFile = filePrefix + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test
+    public void addDemeritInvalidPoints() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        String filePrefix = "addDemeritInvalidPoints";
+        String demeritMessage = person.addDemeritPoints(filePrefix);
+        assertTrue(demeritMessage.contains("Failed"));
+        String expectedFile = filePrefix + "_expected.txt";
+        String actualFile = filePrefix + "_actual.txt";
         assertTrue(compareFiles(expectedFile, actualFile));
     }
 
