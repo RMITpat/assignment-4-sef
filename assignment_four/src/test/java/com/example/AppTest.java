@@ -78,13 +78,6 @@ public class AppTest
         assertTrue( true );
         System.out.println("hi");
     }
-    @Test
-    public void testFiles() {
-        String expectedFile = "functTest1.txt";
-        String actualFile = "functTest2.txt";
-
-        assertTrue(compareFiles(expectedFile, actualFile));
-    }
 
     @Test
     public void addPersonValid() {
@@ -129,4 +122,16 @@ public class AppTest
         String actualFile = "addPersonInvalidAddress_actual.txt";
         assertTrue(compareFiles(expectedFile, actualFile));
     }
+
+    @Test
+    public void addDemeritPoints() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+        String demeritMessage = person.addDemeritPoints("addDemeritPoints");
+        assertTrue(demeritMessage.contains("Success"));
+        String expectedFile = "addDemeritPoints_expected.txt";
+        String actualFile = "addDemeritPoints_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
 }

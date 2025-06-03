@@ -311,7 +311,7 @@ public class Person {
         String inputDate = "";
         String inputDemeritPoints = "";
         
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+fileName))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+fileName+"_input.txt"))) {
             inputDate = reader.readLine();
             inputDemeritPoints = reader.readLine();
             
@@ -366,6 +366,7 @@ public class Person {
             System.out.println("Month must be between 1 and 12 (inclusive)");
             isValid = false;
         }
+        // does not allow 2025 due to nature of validation
         if (year < 1950 || year > 2024) {
             System.out.println("Year must be between 1950 and 2024 (inclusive)");
             isValid = false;
@@ -442,7 +443,7 @@ public class Person {
         for (LocalDate demeritDate : this.demeritPoints.keySet()) {
             Period timeSinceDemerit = Period.between(demeritDate, currentDate);
             if (timeSinceDemerit.getYears() < 2) {
-                demerit += this.demeritPoints.get(demeritDate);
+                totalDemerit += this.demeritPoints.get(demeritDate);
             }
         }
 
@@ -467,7 +468,7 @@ public class Person {
             output.add("Status: Not Suspended");
         }
 
-        File outFile = this.createFile("demeritDetails.txt");
+        File outFile = this.createFile(fileName + "_actual.txt");
         this.fileWriter(outFile, output);
 
         return successMessage;
