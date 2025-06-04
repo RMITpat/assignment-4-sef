@@ -149,4 +149,34 @@ public class AppTest
         assertTrue(compareFiles(expectedFile, actualFile));
     }
 
+    @Test
+    public void addDemeritSuspension() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        String filePrefix = "addDemeritSuspension";
+
+        String demeritMessage = person.addDemeritPoints(filePrefix + "1");
+        assertTrue(demeritMessage.contains("Success"));
+
+        String expectedFile = filePrefix + "1" + "_expected.txt";
+        String actualFile = filePrefix + "1" + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+
+        demeritMessage = person.addDemeritPoints(filePrefix + "2");
+        assertTrue(demeritMessage.contains("Success"));
+
+        expectedFile = filePrefix + "2" + "_expected.txt";
+        actualFile = filePrefix + "2" + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+
+        demeritMessage = person.addDemeritPoints(filePrefix + "3");
+        assertTrue(demeritMessage.contains("Success"));
+
+        expectedFile = filePrefix + "3" + "_expected.txt";
+        actualFile = filePrefix + "3" + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+
+
+    }
 }
