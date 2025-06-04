@@ -305,6 +305,9 @@ public class Person {
         String failedMessage = "Failed";
         String successMessage = "Success";
 
+        File outFile;
+        ArrayList<String> output = new ArrayList<>();
+
         boolean isValid = true;
 
         // Read txt file + parse into strings
@@ -323,7 +326,11 @@ public class Person {
         // each time this chunk of code appears, it is a "checkpoint" for validity.
         // if input is not valid, the file is created with no content, and "Failed" is returned.
         if (!isValid) {
-            this.createFile(fileName + "_actual.txt");
+
+            // Unlike the other breakpoints, 
+            // this one does not create a file,
+            // since no input file was given at all.
+            // this feature assists testing.
             return failedMessage;
         }
 
@@ -357,7 +364,10 @@ public class Person {
         }
 
         if (!isValid) {
-            this.createFile(fileName + "_actual.txt");
+            output.add("Format of inputted date is invalid");
+            outFile = this.createFile(fileName + "_actual.txt");
+            this.fileWriter(outFile, output);
+
             return failedMessage;
         }
 
@@ -374,11 +384,6 @@ public class Person {
         if (year < 1950 || year > 2024) {
             System.out.println("Year must be between 1950 and 2024 (inclusive)");
             isValid = false;
-        }
-
-        if (!isValid) {
-            this.createFile(fileName + "_actual.txt");
-            return failedMessage;
         }
 
         // validate date values relative to each other (e.g. Feb 31st not valid)
@@ -401,7 +406,9 @@ public class Person {
         }
 
         if (!isValid) {
-            this.createFile(fileName + "_actual.txt");
+            outFile = this.createFile(fileName + "_actual.txt");
+            output.add("Inputted date does not exist");
+            this.fileWriter(outFile, output);
             return failedMessage;
         }
 
@@ -421,7 +428,9 @@ public class Person {
         }
 
         if (!isValid) {
-            this.createFile(fileName + "_actual.txt");
+            outFile = this.createFile(fileName + "_actual.txt");
+            output.add("Inputted demerit value is invalid");
+            this.fileWriter(outFile, output);
             return failedMessage;
         }
 
@@ -464,7 +473,6 @@ public class Person {
             System.out.println("Person is not suspended");
         }
 
-        ArrayList<String> output = new ArrayList<>();
         output.add("Demerit Report - " + this.firstName + " " + this.lastName);
         output.add("Person ID: " + this.personId);
         output.add("");
@@ -475,7 +483,7 @@ public class Person {
             output.add("Status: Not Suspended");
         }
 
-        File outFile = this.createFile(fileName + "_actual.txt");
+        outFile = this.createFile(fileName + "_actual.txt");
         this.fileWriter(outFile, output);
 
         return successMessage;

@@ -191,4 +191,27 @@ public class AppTest
         String actualFile = filePrefix + "_actual.txt";
         assertTrue(compareFiles(expectedFile, actualFile));
     }
+
+    @Test
+    public void addDemeritDateInvalid() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        String filePrefix = "addDemeritDateInvalid";
+
+        String demeritMessage = person.addDemeritPoints(filePrefix + "1");
+        assertTrue(demeritMessage.contains("Failed"));
+
+        String expectedFile = filePrefix + "1" + "_expected.txt";
+        String actualFile = filePrefix + "1" + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+
+        demeritMessage = person.addDemeritPoints(filePrefix + "2");
+        assertTrue(demeritMessage.contains("Failed"));
+
+        expectedFile = filePrefix + "2" + "_expected.txt";
+        actualFile = filePrefix + "2" + "_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+
+    }
 }
