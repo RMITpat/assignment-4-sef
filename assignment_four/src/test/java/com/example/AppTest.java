@@ -123,6 +123,65 @@ public class AppTest
         assertTrue(compareFiles(expectedFile, actualFile));
     }
 
+    @Test 
+    public void updatePersonalDetailsValid() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        assertTrue(person.updatePersonalDetails("updatePersonalDetailsValid"));
+        String expectedFile = "updatePersonalDetailsValid_expected.txt";
+        String actualFile = "updatePersonalDetails_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test 
+    public void updatePersonalDetailsinValidAddressChange() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        assertTrue(person.updatePersonalDetails("updatePersonalDetailsValidAddressChange"));
+        String expectedFile = "updatePersonalDetailsValidAddressChange_expected.txt";
+        String actualFile = "updatePersonalDetailsValidAddressChange_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test 
+    public void updatePersonalDetailsinValidNameChange() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        assertTrue(person.updatePersonalDetails("updatePersonalDetailsValidNameChange"));
+        String expectedFile = "updatePersonalDetailsValidNameChange_expected.txt";
+        String actualFile = "updatePersonalDetailsValidNameChange_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    //updatePersonalDetailsInvalidIDChange
+
+    @Test 
+    public void updatePersonalDetailsInvalidIDChange() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        assertFalse(person.updatePersonalDetails("updatePersonalDetailsInvalidIDChange"));
+        String expectedFile = "updatePersonalDetailsInvalidIDChange_expected.txt";
+        String actualFile = "updatePersonalDetailsInvalidIDChange_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+    @Test 
+    public void updatePersonalDetailsInvalidAddressChange() {
+        Person person = new Person();
+        assertTrue(person.addPerson("addPersonValid"));
+
+        assertFalse(person.updatePersonalDetails("updatePersonalDetailsInvalidAddressChange"));
+        String expectedFile = "updatePersonalDetailsInvalidAddressChange_expected.txt";
+        String actualFile = "updatePersonalDetailsInvalidAddressChange_actual.txt";
+        assertTrue(compareFiles(expectedFile, actualFile));
+    }
+
+
+
     @Test
     public void addDemeritPoints() {
         Person person = new Person();

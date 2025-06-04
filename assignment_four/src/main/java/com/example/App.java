@@ -15,7 +15,7 @@ public class App
     {
         //System.out.print("hi");
         Person person = new Person();
-        boolean success = person.addPerson("addPersonTest.txt");    
+        boolean success = person.addPerson("addPersonValid");    
         if (success) {
             System.out.println("Added person successfully");
             
@@ -25,7 +25,7 @@ public class App
             System.out.println("Failed to add person");
         }
 
-        boolean updatePerson = person.updatePersonalDetails("addPersonTest.txt");
+        boolean updatePerson = person.updatePersonalDetails("updatePersonalDetailsValid.txt");
         System.out.println(updatePerson);
         String demeritMessage = person.addDemeritPoints("addDemeritPointsTest.txt");
         System.out.println(demeritMessage);

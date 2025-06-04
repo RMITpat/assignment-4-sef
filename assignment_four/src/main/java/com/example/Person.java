@@ -167,10 +167,10 @@ public class Person {
     }
 
     public boolean updatePersonalDetails (String testFile) {
-        boolean canChangeId = false;
-        boolean canChangeAddress = false;
-        boolean addressValid = false;
-        boolean canChangeAge = false;
+        boolean canChangeId = true;
+        boolean canChangeAddress = true;
+        boolean addressValid = true;
+        boolean canChangeAge = true;
         boolean noChangedAge = true;
         
         String inputPersonId = "";
@@ -178,8 +178,9 @@ public class Person {
         String inputFirstName = "";
         String inputLastName = "";
         String inputDate ="";
+        
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+ testFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+ testFile + ".txt"))) {
 
             inputPersonId = reader.readLine();
             inputAddress = reader.readLine();
@@ -236,9 +237,11 @@ public class Person {
                     Period age = Period.between(birthDate, currentDate);
                     int ageYears = age.getYears();
                     canChangeAge = true;
+                    System.out.println(inputDate);
                     if (ageYears < 18) {
                         canChangeAddress = false;
                     }
+                    if (!inputDate.equals(this.birthdate))
                     noChangedAge = false;
                     
                 }
@@ -254,6 +257,7 @@ public class Person {
 
 
         if (!(this.personId.equals(inputPersonId))) {
+            canChangeId = false;
             
             if ((numericValue % 2 != 0) && (inputPersonId.length() == 10) && capsCheck.equals(capsCheck.toUpperCase()) && correctNums && noChangedAge) {
                 int specCheck = 0;
@@ -274,7 +278,7 @@ public class Person {
                 this.address = inputAddress;
             if (canChangeAge)
                 this.birthdate = inputDate;
-            if (canChangeId)
+            if (canChangeId && noChangedAge)
                 this.personId = inputPersonId;
             if (noChangedAge) {
                 this.firstName = inputFirstName;
@@ -288,10 +292,13 @@ public class Person {
             output.add("Address: " + this.address);
             output.add("Birthdate: " + this.birthdate);
 
-            File file = this.createFile("personDetails.txt");
+            File file = this.createFile(testFile + "_actual.txt");
             this.fileWriter(file, output);
         } 
         else {
+            ArrayList<String> output = new ArrayList<>();
+            File file = this.createFile(testFile + "_actual.txt");
+            this.fileWriter(file, output);
             flag = false;
         }
         boolean madeUpdate = flag;
