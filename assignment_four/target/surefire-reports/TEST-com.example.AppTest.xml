@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.AppTest" time="0.029" tests="16" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.example.AppTest" time="0.041" tests="16" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="user.country" value="AU"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/nathankovac/assignment-4-sef/assignment_four/target/surefire/surefirebooter16770449384570932159.jar /Users/nathankovac/assignment-4-sef/assignment_four/target/surefire 2025-06-05T00-51-19_213-jvmRun1 surefire12946383769696133405tmp surefire_08259804441133431805tmp"/>
+    <property name="sun.java.command" value="/Users/nathankovac/assignment-4-sef/assignment_four/target/surefire/surefirebooter10847127379846254858.jar /Users/nathankovac/assignment-4-sef/assignment_four/target/surefire 2025-06-05T15-33-37_320-jvmRun1 surefire11231131436333605914tmp surefire_010716173897403261130tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="com.example.AppTest"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/nathankovac/assignment-4-sef/assignment_four/target/surefire/surefirebooter16770449384570932159.jar"/>
+    <property name="surefire.real.class.path" value="/Users/nathankovac/assignment-4-sef/assignment_four/target/surefire/surefirebooter10847127379846254858.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.6+8-LTS-188"/>
@@ -59,20 +59,20 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="updatePersonalDetailsInvalidAddressChange" classname="com.example.AppTest" time="0.009"/>
+  <testcase name="updatePersonalDetailsInvalidAddressChange" classname="com.example.AppTest" time="0.011"/>
   <testcase name="shouldAnswerWithTrue" classname="com.example.AppTest" time="0"/>
   <testcase name="updatePersonalDetailsInvalidIDChange" classname="com.example.AppTest" time="0.001"/>
   <testcase name="addPersonInvalidAddress" classname="com.example.AppTest" time="0"/>
-  <testcase name="addPersonInvalidIDLength" classname="com.example.AppTest" time="0"/>
-  <testcase name="updatePersonalDetailsinValidNameChange" classname="com.example.AppTest" time="0.001"/>
-  <testcase name="updatePersonalDetailsinValidAddressChange" classname="com.example.AppTest" time="0.001"/>
-  <testcase name="addDemeritSuspension" classname="com.example.AppTest" time="0.002"/>
-  <testcase name="addPersonValid" classname="com.example.AppTest" time="0.001"/>
-  <testcase name="addDemeritPoints" classname="com.example.AppTest" time="0"/>
-  <testcase name="addDemeritDateInvalid" classname="com.example.AppTest" time="0.001"/>
+  <testcase name="addPersonInvalidIDLength" classname="com.example.AppTest" time="0.001"/>
+  <testcase name="updatePersonalDetailsinValidNameChange" classname="com.example.AppTest" time="0.003"/>
+  <testcase name="updatePersonalDetailsinValidAddressChange" classname="com.example.AppTest" time="0"/>
+  <testcase name="addDemeritSuspension" classname="com.example.AppTest" time="0.004"/>
+  <testcase name="addPersonValid" classname="com.example.AppTest" time="0"/>
+  <testcase name="addDemeritPoints" classname="com.example.AppTest" time="0.003"/>
+  <testcase name="addDemeritDateInvalid" classname="com.example.AppTest" time="0"/>
   <testcase name="addPersonInvalidState" classname="com.example.AppTest" time="0"/>
-  <testcase name="addDemeritInvalidPoints" classname="com.example.AppTest" time="0"/>
-  <testcase name="updatePersonalDetailsValid" classname="com.example.AppTest" time="0"/>
-  <testcase name="addPersonInvalidID" classname="com.example.AppTest" time="0.001"/>
+  <testcase name="addDemeritInvalidPoints" classname="com.example.AppTest" time="0.004"/>
+  <testcase name="updatePersonalDetailsValid" classname="com.example.AppTest" time="0.002"/>
+  <testcase name="addPersonInvalidID" classname="com.example.AppTest" time="0"/>
   <testcase name="addDemeritPointsInactive" classname="com.example.AppTest" time="0"/>
 </testsuite>

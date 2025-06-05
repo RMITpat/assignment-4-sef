@@ -179,7 +179,7 @@ public class Person {
         String inputLastName = "";
         String inputDate ="";
         
-
+                //reads the input file from the string name
         try (BufferedReader reader = new BufferedReader(new FileReader("src/test/java/com/example/"+ testFile + ".txt"))) {
 
             inputPersonId = reader.readLine();
@@ -195,7 +195,7 @@ public class Person {
         }
 
 
-
+        //converts the character value of both numbers at the start of the ID into their actual numerical values
         int asciiValue = (int) inputPersonId.charAt(0);
         int numericValue = asciiValue - '0';
         int asciiValue2 = (int) inputPersonId.charAt(1);
@@ -205,10 +205,10 @@ public class Person {
 
 
         
-
+        //checks the values are within the correct ranges implied by the rubric
         if ((numericValue <= 9 && numericValue >= 2) && (numericValue2 <= 9 && numericValue2 >= 2))
             correctNums = true;
-
+        //checks whether the address values are the same, if not it checks the validity of the new value
         if(!(this.address.equals(inputAddress))) {
             String[] parts = inputAddress.split("\\|");
             addressValid = true;
@@ -223,10 +223,10 @@ public class Person {
                 }
             }
         }
-                    
+                    // first verifies the input date used as valid formatting
         String[] dateParts = inputDate.split("-");
         if (dateParts.length == 3) {
-            int year = Integer.parseInt(dateParts[2]);
+            int year = Integer.parseInt(dateParts[2]);// splitting the string xx-xx-xxxx, into day, month, year
             int day = Integer.parseInt(dateParts[0]);
             int month = Integer.parseInt(dateParts[1]);
 
@@ -239,8 +239,8 @@ public class Person {
                     canChangeAge = true;
                     System.out.println(inputDate);
                     if (ageYears < 18) {
-                        canChangeAddress = false;
-                    }
+                        canChangeAddress = false; // sets the change of adress to false when the age of the user is
+                    }                               // less than 18
                     if (!inputDate.equals(this.birthdate))
                     noChangedAge = false;
                     
@@ -271,11 +271,11 @@ public class Person {
 
             
         } 
-        
-        boolean flag = true;
-        if (canChangeAge && canChangeId && addressValid) {
-            if (canChangeAddress && noChangedAge)
-                this.address = inputAddress;
+        // main logic for whether change should be allowed
+        boolean flag = true; // only flags false when addperson rules are broken
+        if (canChangeAge && canChangeId && addressValid) { // allows certain changes when my rules are broken
+            if (canChangeAddress && noChangedAge)           // because otherwsie the ruleset leads to logical 
+                this.address = inputAddress;                 // inconsistency
             if (canChangeAge)
                 this.birthdate = inputDate;
             if (canChangeId && noChangedAge)
