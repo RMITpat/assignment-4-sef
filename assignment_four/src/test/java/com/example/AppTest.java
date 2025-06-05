@@ -130,7 +130,7 @@ public class AppTest
 
         assertTrue(person.updatePersonalDetails("updatePersonalDetailsValid"));
         String expectedFile = "updatePersonalDetailsValid_expected.txt";
-        String actualFile = "updatePersonalDetails_actual.txt";
+        String actualFile = "updatePersonalDetailsValid_actual.txt";
         assertTrue(compareFiles(expectedFile, actualFile));
     }
 
